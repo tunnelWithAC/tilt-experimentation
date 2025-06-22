@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hello-tilt", "hello-tilt\hello-tilt.csproj", "{93FEEC91-90C7-4AE0-BD6F-8347609CF1DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{67508A75-8EED-4747-99F6-15A5EEE1AA29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hello-tilt.tests", "tests\hello-tilt.tests\hello-tilt.tests.csproj", "{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +19,18 @@ Global
 		{93FEEC91-90C7-4AE0-BD6F-8347609CF1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93FEEC91-90C7-4AE0-BD6F-8347609CF1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93FEEC91-90C7-4AE0-BD6F-8347609CF1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6CBB3D4-2FA5-4AE9-A822-1E20FC7A67BB}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC} = {67508A75-8EED-4747-99F6-15A5EEE1AA29}
 	EndGlobalSection
 EndGlobal
