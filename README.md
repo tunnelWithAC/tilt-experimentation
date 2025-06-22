@@ -6,11 +6,13 @@
 include('./frontend/Tiltfile')
 include('./backend/Tiltfile')
 ```
-[[source]](https://docs.tilt.dev/multiple_repos.html)
+[Source: Tilt Multiple Repos](https://docs.tilt.dev/multiple_repos.html)
 
 ## ctlptl
 
 `ctlptl` (pronounced "cattle patrol") is a CLI for declaratively setting up local Kubernetes clusters.
+
+[Source: ctlptl repo](https://github.com/tilt-dev/ctlptl)
 
 ## Kustomize
 
