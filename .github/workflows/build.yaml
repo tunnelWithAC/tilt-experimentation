@@ -26,6 +26,22 @@ jobs:
       run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
 
     - name: Test with dotnet
-      run: dotnet test ./basic-dotnet-example/tests/hello-tilt.tests/hello-tilt.tests.csproj
+      run: dotnet test basic-dotnet-example/hello-tilt.sln
+
+  tilt-ci:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up kind cluster
+        uses: helm/kind-action@v1.10.0
+
+      - name: Set up Tilt
+        uses: tilt-dev/setup-tilt@v1
+
+      - name: Run Tilt CI
+        run: tilt ci --file basic-dotnet-example/Tiltfile
 
     # https://www.hashicorp.com/en/blog/vault-github-action
