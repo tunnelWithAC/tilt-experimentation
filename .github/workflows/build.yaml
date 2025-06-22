@@ -27,3 +27,5 @@ jobs:
 
     - name: Test with dotnet
       run: dotnet test ./basic-dotnet-example/tests/hello-tilt.tests/hello-tilt.tests.csproj
+
+    # https://www.hashicorp.com/en/blog/vault-github-action
