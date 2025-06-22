@@ -1,0 +1,26 @@
+name: Build and Dockerize hello-tilt
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build with dotnet
+      run: dotnet build ./basic-dotnet-example/hello-tilt/hello-tilt.csproj --configuration Release
+
+    - name: Build Docker image
+      run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
