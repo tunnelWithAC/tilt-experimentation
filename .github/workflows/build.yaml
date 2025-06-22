@@ -24,3 +24,6 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
+
+    - name: Test with dotnet
+      run: dotnet test ./basic-dotnet-example/tests/hello-tilt.tests/hello-tilt.tests.csproj
