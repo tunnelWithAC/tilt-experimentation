@@ -38,8 +38,8 @@ jobs:
       - name: Set up kind cluster
         uses: helm/kind-action@v1.10.0
 
-      - name: Set up Tilt
-        uses: tilt-dev/setup-tilt@v1
+      - name: Install Tilt
+        run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
 
       - name: Run Tilt CI
         run: tilt ci --file basic-dotnet-example/Tiltfile
