@@ -1,0 +1,4 @@
+resources:
+  - ../../kubernetes.yaml
+patches:
+  - path: port-patch.yaml 
