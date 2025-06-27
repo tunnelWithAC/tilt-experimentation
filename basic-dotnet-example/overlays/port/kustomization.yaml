@@ -1,4 +1,7 @@
 resources:
-  - ../../kubernetes.yaml
+  - ../../k8s
 patches:
-  - path: port-patch.yaml 
+  - path: port-patch.yaml
+    target:
+      kind: Deployment
+      name: hello-tilt
