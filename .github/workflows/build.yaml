@@ -29,7 +29,7 @@ jobs:
   #     run: dotnet test basic-dotnet-example/hello-tilt.sln
 
   tilt-ci:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
