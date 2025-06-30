@@ -6,7 +6,7 @@ k8s_resource('hello-tilt', port_forwards='8080:8080')
 local_resource(
     'smoke-test-weatherforecast',
     '''
-    for i in {1..30}; do
+    for i in $(seq 1 30); do
       curl --fail http://localhost:8080/weatherforecast && exit 0
       echo "Waiting for service... ($i/30)"
       sleep 7
