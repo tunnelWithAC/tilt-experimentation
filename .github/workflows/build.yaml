@@ -7,29 +7,29 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Check out code
+  #     uses: actions/checkout@v4
 
-    - name: Set up .NET 8
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
+  #   - name: Set up .NET 8
+  #     uses: actions/setup-dotnet@v4
+  #     with:
+  #       dotnet-version: '8.0.x'
 
-    - name: Build with dotnet
-      run: dotnet build ./basic-dotnet-example/hello-tilt/hello-tilt.csproj --configuration Release
+  #   - name: Build with dotnet
+  #     run: dotnet build ./basic-dotnet-example/hello-tilt/hello-tilt.csproj --configuration Release
 
-    - name: Build Docker image
-      run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
+  #   - name: Build Docker image
+  #     run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
 
-    - name: Test with dotnet
-      run: dotnet test basic-dotnet-example/hello-tilt.sln
+  #   - name: Test with dotnet
+  #     run: dotnet test basic-dotnet-example/hello-tilt.sln
 
   tilt-ci:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code

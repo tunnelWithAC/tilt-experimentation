@@ -6,14 +6,9 @@ spec:
   selector:
     matchLabels:
       app: hello-tilt
-  replicas: 1
   template:
-    metadata:
-      labels:
-        app: hello-tilt
     spec:
       containers:
       - name: hello-tilt
-        image: hello-tilt
         ports:
-        - containerPort: 80
+        - containerPort: 8081 
