@@ -46,3 +46,9 @@ local_resource(
     'curl --fail http://localhost:8080/weatherforecast',
     resource_deps=['hello-tilt'],
 )
+
+local_resource(
+    'kafka-liveness-test',
+    'echo "Kafka is running',
+    resource_deps=['kafka'],
+)
