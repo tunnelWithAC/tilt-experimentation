@@ -1,5 +1,41 @@
 update_settings(max_parallel_updates=10)
 
+# Kafka setup for local development
+docker_build('zookeeper', '.', dockerfile_contents='''
+FROM bitnami/zookeeper:latest
+ENV ALLOW_ANONYMOUS_LOGIN=yes
+''')
+
+docker_build('kafka', '.', dockerfile_contents='''
+FROM bitnami/kafka:latest
+ENV KAFKA_CFG_ZOOKEEPER_CONNECT=localhost:2181
+ENV ALLOW_PLAINTEXT_LISTENER=yes
+ENV KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+ENV KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+''')
+
+# Start Zookeeper first
+local_resource(
+    'zookeeper',
+    'docker run --rm -d --name zookeeper -p 2181:2181 zookeeper:latest',
+    resource_deps=[],
+    serve_cmd='docker run --rm -d --name zookeeper -p 2181:2181 zookeeper:latest',
+    links=[
+        link('http://localhost:2181', 'Zookeeper')
+    ]
+)
+
+# Start Kafka after Zookeeper
+local_resource(
+    'kafka',
+    'docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
+    resource_deps=['zookeeper'],
+    serve_cmd='docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
+    links=[
+        link('http://localhost:9092', 'Kafka')
+    ]
+)
+
 docker_build('hello-tilt', './hello-tilt')
 k8s_yaml(kustomize('overlays/port'))
 # k8s_yaml('k8s/deployment.yaml')
