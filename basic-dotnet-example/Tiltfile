@@ -17,20 +17,19 @@ ENV KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
 # Start Zookeeper first
 local_resource(
     'zookeeper',
-    'docker run --rm -d --name zookeeper -p 2181:2181 zookeeper:latest',
-    resource_deps=[],
-    serve_cmd='docker run --rm -d --name zookeeper -p 2181:2181 zookeeper:latest',
+    'docker rm -f zookeeper 2>/dev/null; docker run --rm -d --name zookeeper -p 2181:2181 bitnami/zookeeper:latest',
+    serve_cmd='docker rm -f zookeeper 2>/dev/null; docker run --rm --name zookeeper -p 2181:2181 bitnami/zookeeper:latest',
     links=[
         link('http://localhost:2181', 'Zookeeper')
     ]
 )
 
-# Start Kafka after Zookeeper
+# # Start Kafka after Zookeeper
 local_resource(
     'kafka',
-    'docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
+    'docker rm -f kafka 2>/dev/null; docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
     resource_deps=['zookeeper'],
-    serve_cmd='docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
+    serve_cmd='docker rm -f kafka 2>/dev/null; docker run --rm -d --name kafka --link zookeeper:zookeeper -p 9092:9092 kafka:latest',
     links=[
         link('http://localhost:9092', 'Kafka')
     ]
