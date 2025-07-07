@@ -17,5 +17,5 @@ local_resource(
 local_resource(
     'kafka-liveness-test',
     'echo "Kafka is running"',
-    resource_deps=['kafka'],
+    resource_deps=['broker'],
 )
