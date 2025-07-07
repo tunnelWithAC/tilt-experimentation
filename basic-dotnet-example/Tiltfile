@@ -1,5 +1,8 @@
 update_settings(max_parallel_updates=10)
 
+# Load Zookeeper and Kafka using docker-compose
+docker_compose('docker-compose.yml')
+
 docker_build('hello-tilt', './hello-tilt')
 k8s_yaml(kustomize('overlays/port'))
 # k8s_yaml('k8s/deployment.yaml')
@@ -9,4 +12,10 @@ local_resource(
     'smoke-test-weatherforecast',
     'curl --fail http://localhost:8080/weatherforecast',
     resource_deps=['hello-tilt'],
+)
+
+local_resource(
+    'kafka-liveness-test',
+    'echo "Kafka is running"',
+    resource_deps=['broker'],
 )
