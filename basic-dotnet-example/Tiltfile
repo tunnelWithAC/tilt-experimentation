@@ -17,8 +17,8 @@ ENV KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
 # Start Zookeeper first
 local_resource(
     'zookeeper',
-    'docker rm -f zookeeper 2>/dev/null; docker run --rm -d --name zookeeper -p 2181:2181 bitnami/zookeeper:latest',
-    serve_cmd='docker rm -f zookeeper 2>/dev/null; docker run --rm --name zookeeper -p 2181:2181 bitnami/zookeeper:latest',
+    'docker rm -f zookeeper 2>/dev/null; docker run --rm -d --name zookeeper -e ALLOW_ANONYMOUS_LOGIN=yes -p 2181:2181 bitnami/zookeeper:latest',
+    serve_cmd='docker rm -f zookeeper 2>/dev/null; docker run --rm --name zookeeper -e ALLOW_ANONYMOUS_LOGIN=yes -p 2181:2181 bitnami/zookeeper:latest',
     links=[
         link('http://localhost:2181', 'Zookeeper')
     ]
