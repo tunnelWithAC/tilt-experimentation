@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloTilt", "HelloTilt\HelloTilt.csproj", "{93FEEC91-90C7-4AE0-BD6F-8347609CF1DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{67508A75-8EED-4747-99F6-15A5EEE1AA29}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloTilt.Tests", "HelloTilt.Tests/HelloTilt.Tests.csproj", "{BCDC367E-9A00-4C14-93CE-7BA8A46A0FFC}"
 EndProject
 Global
