@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-tilt
+  name: hellotilt
 spec:
   selector:
     matchLabels:
-      app: hello-tilt
+      app: hellotilt
   replicas: 1
   template:
     metadata:
       labels:
-        app: hello-tilt
+        app: hellotilt
     spec:
       containers:
-      - name: hello-tilt
-        image: hello-tilt
+      - name: hellotilt
+        image: hellotilt
         ports:
         - containerPort: 8080
         readinessProbe:

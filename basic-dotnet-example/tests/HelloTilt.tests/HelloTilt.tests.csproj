@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>hello_tilt.tests</RootNamespace>
+    <RootNamespace>HelloTilt.tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\hello-tilt\hello-tilt.csproj" />
+    <ProjectReference Include="..\..\HelloTilt\HelloTilt.csproj" />
   </ItemGroup>
 
 </Project>
