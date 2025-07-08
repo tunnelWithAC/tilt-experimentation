@@ -1,4 +1,4 @@
-namespace hello_tilt.tests;
+namespace HelloTilt.Tests;
 
 public class Tests
 {

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-tilt
+  name: hellotilt
 spec:
   selector:
     matchLabels:
-      app: hello-tilt
+      app: hellotilt
   template:
     spec:
       containers:
-      - name: hello-tilt
+      - name: hellotilt
         ports:
         - containerPort: 8081 

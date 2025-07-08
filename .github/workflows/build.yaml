@@ -1,4 +1,4 @@
-name: Build and Dockerize hello-tilt
+name: Build and Dockerize HelloTilt
 
 on:
   push:
@@ -20,16 +20,16 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Build with dotnet
-      run: dotnet build ./basic-dotnet-example/hello-tilt/hello-tilt.csproj --configuration Release
+      run: dotnet build ./basic-dotnet-example/HelloTilt/HelloTilt.csproj --configuration Release
 
     - name: Build Docker image
-      run: docker build -t hello-tilt:latest -f ./basic-dotnet-example/hello-tilt/Dockerfile ./basic-dotnet-example/hello-tilt
+      run: docker build -t hellotilt:latest -f ./basic-dotnet-example/HelloTilt/Dockerfile ./basic-dotnet-example/HelloTilt
 
     - name: Test with dotnet
       run: dotnet test basic-dotnet-example/hello-tilt.sln
 
   tilt-ci:
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
