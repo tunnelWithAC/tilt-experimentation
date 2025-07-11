@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hellotilt
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/your-org/your-repo.git'  # <-- Update to your repo URL
+    targetRevision: HEAD
+    path: basic-dotnet-example/k8s/overlays/prod           # <-- Update if your prod overlay is elsewhere
+    kustomize: {}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: hellotilt
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true 
