@@ -7,7 +7,7 @@ metadata:
     app: hellotilt
 
 data:
-  KAFKA_BROKER: "broker:29092"
+  KAFKA_BROKER: "localhost:29092"
   KAFKA_TOPIC: "weather_updates"
   KAFKA_GROUP_ID: "weather-consumer-group"
 ---
