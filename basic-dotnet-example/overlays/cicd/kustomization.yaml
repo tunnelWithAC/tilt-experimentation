@@ -1,5 +1,0 @@
-bases:
-  - ../../k8s
-
-resources:
- - kafka.yaml

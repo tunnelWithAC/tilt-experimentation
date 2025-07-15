@@ -17,6 +17,22 @@ spec:
         image: hellotilt
         ports:
         - containerPort: 8080
+        env:
+        - name: KAFKA_BROKER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: KAFKA_BROKER
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: KAFKA_TOPIC
+        - name: KAFKA_GROUP_ID
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: KAFKA_GROUP_ID
         readinessProbe:
           httpGet:
             path: /weatherforecast

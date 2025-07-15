@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-weather-updates-topic
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: create-topic
+          image: confluentinc/cp-kafka:7.4.1
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              cub kafka-ready -b kafka-broker:29092 1 20 && \
+              kafka-topics --create --if-not-exists --bootstrap-server kafka-broker:29092 --topic weather_updates --replication-factor 1 --partitions 1

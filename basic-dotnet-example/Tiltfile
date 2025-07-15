@@ -4,7 +4,7 @@ update_settings(max_parallel_updates=10)
 docker_compose('docker-compose.yml')
 
 docker_build('hellotilt', './HelloTilt')
-k8s_yaml(kustomize('overlays/port'))
+k8s_yaml(kustomize('k8s/overlays/port'))
 # k8s_yaml('k8s/deployment.yaml')
 k8s_resource('hellotilt', port_forwards='8080:8080')
 
