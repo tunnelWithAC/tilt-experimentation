@@ -1,5 +1,5 @@
 resources:
-  - ../../k8s
+  - ../../base
 patches:
   - path: port-patch.yaml
     target:
