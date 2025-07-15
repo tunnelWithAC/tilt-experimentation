@@ -2,4 +2,5 @@ bases:
   - ../../base
 
 resources:
- - kafka.yaml
+  - server.kafka-broker.yaml
+  - job.create-kafka-topics.yaml
