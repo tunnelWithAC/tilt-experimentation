@@ -1,4 +1,4 @@
-namespace HelloTilt;
+namespace HelloTilt.Configs;
 
 public class KafkaConfig
 {

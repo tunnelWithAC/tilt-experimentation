@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using HelloTilt.Configs;
 
 namespace HelloTilt;
 
@@ -45,6 +46,9 @@ public class KafkaWeatherConsumer : BackgroundService
                 {
                     _logger.LogError(ex, "Kafka consume error");
                 }
+                
+                // Add a small delay to prevent tight loop and make the method properly async
+                await Task.Delay(100, stoppingToken);
             }
         }
         catch (OperationCanceledException)
