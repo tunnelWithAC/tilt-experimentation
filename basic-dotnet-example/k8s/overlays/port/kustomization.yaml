@@ -1,7 +1,0 @@
-resources:
-  - ../../base
-patches:
-  - path: port-patch.yaml
-    target:
-      kind: Deployment
-      name: hellotilt
