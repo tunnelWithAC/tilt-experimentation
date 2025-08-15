@@ -1,8 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: create-weather-updates-topic
+  name: create-weather-updates-topic-job
 spec:
+  backoffLimit: 3
   template:
     spec:
       restartPolicy: OnFailure
