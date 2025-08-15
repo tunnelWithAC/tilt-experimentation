@@ -9,6 +9,6 @@ k8s_resource('hellotilt', port_forwards='8080:8080')
 
 local_resource(
     'smoke-test-weatherforecast',
-    'curl --fail http://localhost:8080/weatherforecast',
+    'sleep 30 && curl --fail http://localhost:8080/weatherforecast',
     resource_deps=['hellotilt'],
 )
