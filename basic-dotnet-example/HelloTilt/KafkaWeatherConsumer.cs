@@ -4,35 +4,34 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using HelloTilt.Configs;
+
+namespace HelloTilt;
 
 public class KafkaWeatherConsumer : BackgroundService
 {
     private readonly ILogger<KafkaWeatherConsumer> _logger;
-    private readonly string _broker;
-    private readonly string _topic;
-    private readonly string _groupId;
+    private readonly KafkaConfig _kafkaConfig;
 
-    public KafkaWeatherConsumer(ILogger<KafkaWeatherConsumer> logger)
+    public KafkaWeatherConsumer(ILogger<KafkaWeatherConsumer> logger, KafkaConfig kafkaConfig)
     {
         _logger = logger;
-        _broker = Environment.GetEnvironmentVariable("KAFKA_BROKER") ?? "localhost:9092";
-        _topic = Environment.GetEnvironmentVariable("KAFKA_TOPIC") ?? "weather_updates";
-        _groupId = Environment.GetEnvironmentVariable("KAFKA_GROUP_ID") ?? "weather-consumer-group";
+        _kafkaConfig = kafkaConfig;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var config = new ConsumerConfig
         {
-            BootstrapServers = _broker,
-            GroupId = _groupId,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            BootstrapServers = _kafkaConfig.Broker,
+            GroupId = _kafkaConfig.GroupId,
+            AutoOffsetReset = Enum.Parse<AutoOffsetReset>(_kafkaConfig.AutoOffsetReset)
         };
 
         using var consumer = new ConsumerBuilder<Ignore, string>(config).Build();
-        consumer.Subscribe(_topic);
+        consumer.Subscribe(_kafkaConfig.Topic);
 
-        _logger.LogInformation($"Kafka consumer started. Listening to topic: {_topic}");
+        _logger.LogInformation($"Kafka consumer started. Listening to topic: {_kafkaConfig.Topic}");
 
         try
         {
@@ -47,6 +46,9 @@ public class KafkaWeatherConsumer : BackgroundService
                 {
                     _logger.LogError(ex, "Kafka consume error");
                 }
+                
+                // Add a small delay to prevent tight loop and make the method properly async
+                await Task.Delay(100, stoppingToken);
             }
         }
         catch (OperationCanceledException)

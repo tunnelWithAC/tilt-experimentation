@@ -1,9 +1,17 @@
+using Microsoft.Extensions.Options;
+using HelloTilt.Configs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configure Kafka settings
+builder.Services.Configure<KafkaConfig>(builder.Configuration.GetSection("Kafka"));
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<KafkaConfig>>().Value);
+
 // builder.Services.AddHostedService<KafkaWeatherConsumer>();
 
 var app = builder.Build();
@@ -15,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 var summaries = new[]
 {

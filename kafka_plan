@@ -1,0 +1,26 @@
+# Kafka Integration Plan
+
+## 1. Add a Confluent Kafka Consumer to the .NET Service
+- Add a new C# class to `basic-dotnet-example/HelloTilt/` (e.g., `KafkaWeatherConsumer.cs`).
+- Use the `Confluent.Kafka` NuGet package.
+- The consumer will connect to the broker and consume messages from the topic `weather_updates`.
+- Update `Program.cs` to start the consumer as a background service.
+
+## 2. Update docker-compose.yml to Create the Topic
+- Add a new service (e.g., `create-topic`) that depends on the `broker` service.
+- Use the Confluent Kafka CLI image to run a command that creates the `weather_updates` topic after the broker is ready.
+- Ensure the topic is created before the .NET service starts (using depends_on or wait-for-it pattern).
+
+## 3. Add a ConfigMap to deployment.yaml
+- Add a `ConfigMap` resource to `basic-dotnet-example/k8s/deployment.yaml` (or as a separate file if preferred).
+- The ConfigMap will contain Kafka connection details (e.g., broker address, topic name).
+- Mount the ConfigMap as environment variables in the deployment for the .NET service.
+
+## 4. Update .NET Service to Read Config from Environment
+- Update the Kafka consumer code to read broker address and topic name from environment variables.
+
+## 5. Summary of Files to Change/Create
+- `basic-dotnet-example/HelloTilt/KafkaWeatherConsumer.cs` (new)
+- `basic-dotnet-example/HelloTilt/Program.cs` (update)
+- `basic-dotnet-example/docker-compose.yml` (update)
+- `basic-dotnet-example/k8s/deployment.yaml` (update or add ConfigMap) 
