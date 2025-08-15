@@ -1,11 +1,11 @@
 update_settings(max_parallel_updates=10)
 
-docker_build('hello-tilt', './HelloTilt')
+docker_build('hellotilt', './HelloTilt')
 k8s_yaml('k8s/base/deployment.yaml')
-k8s_resource('hello-tilt', port_forwards='8080:8080')
+k8s_resource('hellotilt', port_forwards='8080:8080')
 
 local_resource(
     'smoke-test-weatherforecast',
     'curl --fail http://localhost:8080/weatherforecast',
-    resource_deps=['hello-tilt'],
+    resource_deps=['hellotilt'],
 )
